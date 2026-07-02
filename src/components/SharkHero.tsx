@@ -15,10 +15,11 @@ const SharkHero: React.FC = () => {
   const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Only animate if the user hasn't requested reduced motion
+    // Only animate if the user hasn't requested reduced motion and is not on mobile
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = window.innerWidth <= 768;
     
-    if (prefersReducedMotion || !containerRef.current) return;
+    if (prefersReducedMotion || isMobile || !containerRef.current) return;
 
     const tl = gsap.timeline({
       scrollTrigger: {
