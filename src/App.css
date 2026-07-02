@@ -7,3 +7,7 @@
 .main-content {
   flex: 1;
 }
+
+.route-loading {
+  min-height: 40vh;
+}

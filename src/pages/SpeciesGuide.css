@@ -8,4 +8,9 @@
   .species-grid {
     grid-template-columns: 1fr;
   }
+
+  .species-grid-item {
+    content-visibility: auto;
+    contain-intrinsic-size: 680px;
+  }
 }

@@ -27,7 +27,14 @@ const SpeciesCard: React.FC<SpeciesProps> = ({ species }) => {
       
       {species.imageUrl && (
         <div className="species-image-container">
-          <img src={species.imageUrl} alt={species.japaneseName} className="species-image" loading="lazy" />
+          <img
+            src={species.imageUrl}
+            alt={species.japaneseName}
+            className="species-image"
+            loading="lazy"
+            decoding="async"
+            sizes="(max-width: 768px) 100vw, 33vw"
+          />
         </div>
       )}
       

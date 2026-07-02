@@ -103,3 +103,10 @@
 .note-item.conservation {
   border-color: var(--color-muted-teal);
 }
+
+@media (hover: none) {
+  .species-card:hover,
+  .species-card:hover .species-image {
+    transform: none;
+  }
+}

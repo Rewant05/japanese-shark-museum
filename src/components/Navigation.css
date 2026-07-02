@@ -5,11 +5,13 @@
   width: 100%;
   z-index: 1000;
   transition: background-color 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
-  padding: 1.5rem 0;
-  background-color: transparent;
+  padding: 1.25rem 0;
+  background-color: rgba(10, 17, 40, 0.82);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
 }
 
-.navigation.scrolled {
+.navigation.scrolled,
+.navigation.menu-open {
   background-color: rgba(10, 17, 40, 0.95);
   backdrop-filter: blur(10px);
   padding: 1rem 0;
@@ -23,6 +25,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1.5rem;
+  min-height: 48px;
+  position: relative;
+  z-index: 2;
 }
 
 .nav-logo {
@@ -32,26 +38,31 @@
   color: var(--color-bone-white);
   text-decoration: none;
   letter-spacing: 0.1em;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .nav-desktop {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.25rem;
+  min-width: 0;
 }
 
 .nav-links {
   display: flex;
   list-style: none;
-  gap: 1.5rem;
+  gap: 1rem;
+  align-items: center;
 }
 
 .nav-links a {
   color: var(--color-bone-white);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 500;
   position: relative;
   padding-bottom: 0.25rem;
+  white-space: nowrap;
 }
 
 .nav-links a::after {
@@ -73,6 +84,7 @@
 .nav-cta {
   padding: 0.6rem 1.5rem;
   font-size: 0.9rem;
+  flex-shrink: 0;
 }
 
 .mobile-toggle {
@@ -96,11 +108,13 @@
   align-items: center;
   transform: translateY(-100%);
   transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-  z-index: -1;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .nav-mobile.open {
   transform: translateY(0);
+  pointer-events: auto;
 }
 
 .mobile-links {
@@ -120,7 +134,7 @@
   margin-top: 1rem;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1180px) {
   .nav-desktop {
     display: none;
   }
@@ -131,9 +145,26 @@
 }
 
 @media (max-width: 768px) {
+  :root {
+    --nav-height: 80px;
+  }
+
+  .navigation {
+    padding: 1rem 0;
+    background-color: rgba(10, 17, 40, 0.96);
+  }
+
   .navigation.scrolled {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     background-color: rgba(10, 17, 40, 1);
+  }
+
+  .nav-container {
+    padding: 0 1.25rem;
+  }
+
+  .nav-logo {
+    font-size: 1.25rem;
   }
 }

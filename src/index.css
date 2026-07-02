@@ -9,12 +9,17 @@
   
   --font-sans: 'Noto Sans JP', sans-serif;
   --font-serif: 'Shippori Mincho', serif;
+  --nav-height: 88px;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html {
+  scroll-padding-top: var(--nav-height);
 }
 
 body {
@@ -99,6 +104,12 @@ button {
 .btn-secondary:hover {
   background-color: rgba(255, 255, 255, 0.1);
   color: white;
+}
+
+@media (hover: none) {
+  .btn-primary:hover {
+    transform: none;
+  }
 }
 
 /* Responsive container */

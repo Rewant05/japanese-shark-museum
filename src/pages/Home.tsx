@@ -1,6 +1,6 @@
 import React from 'react';
 import SharkHero from '../components/SharkHero';
-import { siteData } from '../config/siteData';
+import { homeHighlights } from '../config/homeHighlights';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import './Home.css';
@@ -30,7 +30,7 @@ const Home: React.FC = () => {
         <div className="container">
           <h2 className="section-title">注目の展示</h2>
           <div className="highlights-grid">
-            {siteData.exhibits.slice(0, 3).map((exhibit) => (
+            {homeHighlights.map((exhibit) => (
               <div key={exhibit.id} className="highlight-card">
                 <h3>{exhibit.title}</h3>
                 <p>{exhibit.shortDescription}</p>

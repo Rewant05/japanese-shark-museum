@@ -1,34 +1,56 @@
 import React, { useEffect } from 'react';
 import { siteData } from '../config/siteData';
 import ExhibitCard from '../components/ExhibitCard';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Exhibits.css';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const Exhibits: React.FC = () => {
   useEffect(() => {
-    const exhibits = document.querySelectorAll('.exhibit-wrapper');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isDesktop = window.matchMedia('(min-width: 769px)').matches;
     
-    exhibits.forEach((exhibit) => {
-      gsap.fromTo(exhibit, 
-        { x: -50, opacity: 0 },
-        { 
-          x: 0, 
-          opacity: 1, 
-          duration: 0.8,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: exhibit,
-            start: "top 80%",
+    if (prefersReducedMotion || !isDesktop) return;
+
+    let isCancelled = false;
+    let cleanupAnimation: (() => void) | undefined;
+
+    const loadAnimation = async () => {
+      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+        import('gsap'),
+        import('gsap/ScrollTrigger'),
+      ]);
+
+      if (isCancelled) return;
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      const exhibits = document.querySelectorAll('.exhibit-wrapper');
+
+      exhibits.forEach((exhibit) => {
+        gsap.fromTo(exhibit,
+          { x: -50, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: exhibit,
+              start: 'top 80%',
+            }
           }
-        }
-      );
-    });
+        );
+      });
+
+      cleanupAnimation = () => {
+        ScrollTrigger.getAll().forEach(t => t.kill());
+      };
+    };
+
+    void loadAnimation();
 
     return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill());
+      isCancelled = true;
+      cleanupAnimation?.();
     };
   }, []);
 

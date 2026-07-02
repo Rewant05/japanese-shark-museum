@@ -1,26 +1,30 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { siteData } from '../config/siteData';
+import { siteMeta } from '../config/siteMeta';
 import { Mail, MapPin, Clock } from 'lucide-react';
 import './Footer.css';
 
 const Footer: React.FC = () => {
+  const handleFooterLinkClick = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  };
+
   return (
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-top">
           <div className="footer-brand">
-            <h2 className="footer-logo">{siteData.websiteName}</h2>
-            <p className="footer-tagline">{siteData.tagline}</p>
+            <h2 className="footer-logo">{siteMeta.websiteName}</h2>
+            <p className="footer-tagline">{siteMeta.tagline}</p>
           </div>
           
           <div className="footer-links-grid">
             <div className="footer-col">
               <h3>メニュー</h3>
               <ul>
-                {siteData.navigation.map((item) => (
+                {siteMeta.navigation.map((item) => (
                   <li key={item.path}>
-                    <Link to={item.path}>{item.label}</Link>
+                    <Link to={item.path} onClick={handleFooterLinkClick}>{item.label}</Link>
                   </li>
                 ))}
               </ul>
@@ -29,23 +33,23 @@ const Footer: React.FC = () => {
             <div className="footer-col">
               <h3>ご案内</h3>
               <ul className="footer-contact">
-                <li><MapPin size={16} /> <span>{siteData.address}</span></li>
-                <li><Clock size={16} /> <span>{siteData.businessHours}</span></li>
-                <li><Mail size={16} /> <a href={`mailto:${siteData.email}`}>{siteData.email}</a></li>
+                <li><MapPin size={16} /> <span>{siteMeta.address}</span></li>
+                <li><Clock size={16} /> <span>{siteMeta.businessHours}</span></li>
+                <li><Mail size={16} /> <a href={`mailto:${siteMeta.email}`}>{siteMeta.email}</a></li>
               </ul>
             </div>
             
             <div className="footer-col">
               <h3>法的情報</h3>
               <ul>
-                {siteData.footerLinks.map((item) => (
+                {siteMeta.footerLinks.map((item) => (
                   <li key={item.path}>
-                    <Link to={item.path}>{item.label}</Link>
+                    <Link to={item.path} onClick={handleFooterLinkClick}>{item.label}</Link>
                   </li>
                 ))}
               </ul>
               <div className="footer-social">
-                <a href={siteData.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <a href={siteMeta.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                   IG
                 </a>
               </div>
@@ -54,9 +58,9 @@ const Footer: React.FC = () => {
         </div>
         
         <div className="footer-bottom">
-          <p className="footer-disclaimer">{siteData.disclaimer}</p>
+          <p className="footer-disclaimer">{siteMeta.disclaimer}</p>
           <p className="footer-copyright">
-            &copy; {new Date().getFullYear()} {siteData.romanizedName}. All rights reserved. (Fictional Museum Concept)
+            &copy; {new Date().getFullYear()} {siteMeta.romanizedName}. All rights reserved. (Fictional Museum Concept)
           </p>
         </div>
       </div>

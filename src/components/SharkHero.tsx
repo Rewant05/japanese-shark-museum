@@ -1,11 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { siteData } from '../config/siteData';
+import { siteMeta } from '../config/siteMeta';
 import { ChevronDown } from 'lucide-react';
 import './SharkHero.css';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const SharkHero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -15,44 +11,74 @@ const SharkHero: React.FC = () => {
   const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Only animate if the user hasn't requested reduced motion and is not on mobile
+    // Only animate if the user hasn't requested reduced motion and is not on mobile.
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isMobile = window.innerWidth <= 768;
+    const isDesktop = window.matchMedia('(min-width: 769px)').matches;
     
-    if (prefersReducedMotion || isMobile || !containerRef.current) return;
+    if (prefersReducedMotion || !isDesktop || !containerRef.current) return;
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: 'top top',
-        end: '+=150%',
-        scrub: 1,
-        pin: true,
+    let isCancelled = false;
+    let cleanupAnimation: (() => void) | undefined;
+
+    const loadAnimation = async () => {
+      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+        import('gsap'),
+        import('gsap/ScrollTrigger'),
+      ]);
+
+      if (
+        isCancelled ||
+        !containerRef.current ||
+        !bodyRef.current ||
+        !upperJawRef.current ||
+        !lowerJawRef.current ||
+        !textRef.current
+      ) {
+        return;
       }
-    });
 
-    // Animate the shark components
-    tl.to(bodyRef.current, {
-      scale: 1.2,
-      y: '5%',
-      ease: 'power1.inOut'
-    }, 0)
-    .to(upperJawRef.current, {
-      y: '-20%',
-      ease: 'power1.inOut'
-    }, 0.2)
-    .to(lowerJawRef.current, {
-      y: '20%',
-      ease: 'power1.inOut'
-    }, 0.2)
-    .to(textRef.current, {
-      opacity: 0,
-      y: '-50px',
-      ease: 'power1.in'
-    }, 0);
+      gsap.registerPlugin(ScrollTrigger);
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top top',
+          end: '+=150%',
+          scrub: 1,
+          pin: true,
+        }
+      });
+
+      tl.to(bodyRef.current, {
+        scale: 1.2,
+        y: '5%',
+        ease: 'power1.inOut'
+      }, 0)
+      .to(upperJawRef.current, {
+        y: '-20%',
+        ease: 'power1.inOut'
+      }, 0.2)
+      .to(lowerJawRef.current, {
+        y: '20%',
+        ease: 'power1.inOut'
+      }, 0.2)
+      .to(textRef.current, {
+        opacity: 0,
+        y: '-50px',
+        ease: 'power1.in'
+      }, 0);
+
+      cleanupAnimation = () => {
+        tl.scrollTrigger?.kill();
+        tl.kill();
+      };
+    };
+
+    void loadAnimation();
 
     return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill());
+      isCancelled = true;
+      cleanupAnimation?.();
     };
   }, []);
 
@@ -81,7 +107,7 @@ const SharkHero: React.FC = () => {
 
       <div className="hero-content" ref={textRef}>
         <h1 className="hero-title">「海の支配者を、<br/>もっと正確に知る。」</h1>
-        <p className="hero-subtitle">{siteData.description}</p>
+        <p className="hero-subtitle">{siteMeta.description}</p>
         <div className="scroll-indicator">
           <span>SCROLL</span>
           <ChevronDown className="scroll-arrow" size={24} />

@@ -1,13 +1,15 @@
 .hero-container {
   height: 100vh;
-  width: 100vw;
+  height: 100svh;
+  width: 100%;
   position: relative;
   overflow: hidden;
+  overflow: clip;
   background-color: var(--color-abyss-navy);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 80px;
+  padding: var(--nav-height) 1.5rem 3rem;
   box-sizing: border-box;
 }
 
@@ -86,12 +88,11 @@
   z-index: 10;
   text-align: center;
   color: var(--color-bone-white);
-  padding: 0 2rem;
-  max-width: 800px;
+  width: min(100%, 800px);
 }
 
 .hero-title {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: 4.5rem;
   line-height: 1.2;
   margin-bottom: 2rem;
   text-shadow: 0 10px 30px rgba(0,0,0,0.8);
@@ -99,7 +100,7 @@
 }
 
 .hero-subtitle {
-  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-size: 1.2rem;
   color: var(--color-steel-gray);
   margin-bottom: 4rem;
   line-height: 1.8;
@@ -132,8 +133,51 @@
   }
 }
 
+@media (max-width: 1024px) {
+  .hero-title {
+    font-size: 3.5rem;
+  }
+}
+
 @media (max-width: 768px) {
+  .hero-container {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: calc(var(--nav-height) + 1rem) 1rem 2.5rem;
+  }
+
+  .ocean-bg {
+    background: linear-gradient(180deg, #002b55 0%, var(--color-black-blue) 74%);
+  }
+
+  .shark-wrapper {
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+  }
+
   .shark-upper-jaw, .shark-lower-jaw {
     box-shadow: none;
+  }
+
+  .hero-title {
+    font-size: 2.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .scroll-indicator {
+    animation: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-title {
+    font-size: 2.1rem;
   }
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { siteData } from '../config/siteData';
+import { siteMeta } from '../config/siteMeta';
 import { Menu, X } from 'lucide-react';
 import './Navigation.css';
 
@@ -8,6 +8,12 @@ const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const navigationClassName = `navigation ${scrolled ? 'scrolled' : ''} ${isOpen ? 'menu-open' : ''}`;
+
+  const handleNavLinkClick = () => {
+    setIsOpen(false);
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,24 +28,28 @@ const Navigation: React.FC = () => {
   }, [location]);
 
   return (
-    <header className={`navigation ${scrolled ? 'scrolled' : ''}`}>
+    <header className={navigationClassName}>
       <div className="nav-container">
-        <Link to="/" className="nav-logo">
-          {siteData.websiteName}
+        <Link to="/" className="nav-logo" onClick={handleNavLinkClick}>
+          {siteMeta.websiteName}
         </Link>
 
         {/* Desktop Nav */}
         <nav className="nav-desktop">
           <ul className="nav-links">
-            {siteData.navigation.map((item) => (
+            {siteMeta.navigation.map((item) => (
               <li key={item.path}>
-                <Link to={item.path} className={location.pathname === item.path ? 'active' : ''}>
+                <Link
+                  to={item.path}
+                  className={location.pathname === item.path ? 'active' : ''}
+                  onClick={handleNavLinkClick}
+                >
                   {item.label}
                 </Link>
               </li>
             ))}
           </ul>
-          <Link to="/exhibits" className="btn-primary nav-cta">
+          <Link to="/exhibits" className="btn-primary nav-cta" onClick={handleNavLinkClick}>
             展示を見る
           </Link>
         </nav>
@@ -57,15 +67,19 @@ const Navigation: React.FC = () => {
       {/* Mobile Nav */}
       <div className={`nav-mobile ${isOpen ? 'open' : ''}`}>
         <ul className="mobile-links">
-          {siteData.navigation.map((item) => (
+          {siteMeta.navigation.map((item) => (
             <li key={item.path}>
-              <Link to={item.path} className={location.pathname === item.path ? 'active' : ''}>
+              <Link
+                to={item.path}
+                className={location.pathname === item.path ? 'active' : ''}
+                onClick={handleNavLinkClick}
+              >
                 {item.label}
               </Link>
             </li>
           ))}
           <li>
-            <Link to="/exhibits" className="btn-primary mobile-cta">
+            <Link to="/exhibits" className="btn-primary mobile-cta" onClick={handleNavLinkClick}>
               展示を見る
             </Link>
           </li>

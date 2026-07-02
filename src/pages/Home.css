@@ -67,3 +67,9 @@
 .highlight-link:hover {
   color: var(--color-cyan-highlight);
 }
+
+@media (hover: none) {
+  .highlight-card:hover {
+    transform: none;
+  }
+}

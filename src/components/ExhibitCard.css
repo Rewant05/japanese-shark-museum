@@ -60,3 +60,9 @@
   background: rgba(0, 242, 254, 0.1);
   color: var(--color-cyan-highlight);
 }
+
+@media (hover: none) {
+  .exhibit-card:hover {
+    transform: none;
+  }
+}
