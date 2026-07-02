@@ -2,14 +2,13 @@ import React from 'react';
 import SharkHero from '../components/SharkHero';
 import { homeHighlights } from '../config/homeHighlights';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
 import './Home.css';
 
 const Home: React.FC = () => {
   return (
     <div className="home-page">
       <SharkHero />
-      
+
       <section className="section intro-section">
         <div className="container intro-container">
           <h2 className="section-title">サメとは何か？</h2>
@@ -20,12 +19,12 @@ const Home: React.FC = () => {
           </p>
           <div className="intro-actions">
             <Link to="/about" className="btn-secondary">
-              博物館について <ArrowRight size={18} style={{ verticalAlign: 'middle', marginLeft: '8px' }} />
+              博物館について <span className="inline-arrow" aria-hidden="true"></span>
             </Link>
           </div>
         </div>
       </section>
-      
+
       <section className="section highlights-section">
         <div className="container">
           <h2 className="section-title">注目の展示</h2>
@@ -35,7 +34,7 @@ const Home: React.FC = () => {
                 <h3>{exhibit.title}</h3>
                 <p>{exhibit.shortDescription}</p>
                 <Link to={`/exhibits#${exhibit.id}`} className="highlight-link">
-                  詳細を見る <ArrowRight size={16} />
+                  詳細を見る <span className="inline-arrow" aria-hidden="true"></span>
                 </Link>
               </div>
             ))}

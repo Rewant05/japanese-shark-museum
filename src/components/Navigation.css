@@ -89,10 +89,57 @@
 
 .mobile-toggle {
   display: none;
-  background: none;
+  width: 44px;
+  height: 44px;
+  background: transparent;
   border: none;
   color: var(--color-bone-white);
   cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mobile-toggle-bars {
+  position: relative;
+  display: block;
+  width: 26px;
+  height: 18px;
+}
+
+.mobile-toggle-bars span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  transform-origin: center;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.mobile-toggle-bars span:nth-child(1) {
+  top: 0;
+}
+
+.mobile-toggle-bars span:nth-child(2) {
+  top: 8px;
+}
+
+.mobile-toggle-bars span:nth-child(3) {
+  bottom: 0;
+}
+
+.mobile-toggle.is-open .mobile-toggle-bars span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.mobile-toggle.is-open .mobile-toggle-bars span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-toggle.is-open .mobile-toggle-bars span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
 }
 
 .nav-mobile {
@@ -140,7 +187,7 @@
   }
   
   .mobile-toggle {
-    display: block;
+    display: flex;
   }
 }
 

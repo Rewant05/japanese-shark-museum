@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { siteMeta } from '../config/siteMeta';
-import { Mail, MapPin, Clock } from 'lucide-react';
 import './Footer.css';
 
 const Footer: React.FC = () => {
@@ -33,9 +32,9 @@ const Footer: React.FC = () => {
             <div className="footer-col">
               <h3>ご案内</h3>
               <ul className="footer-contact">
-                <li><MapPin size={16} /> <span>{siteMeta.address}</span></li>
-                <li><Clock size={16} /> <span>{siteMeta.businessHours}</span></li>
-                <li><Mail size={16} /> <a href={`mailto:${siteMeta.email}`}>{siteMeta.email}</a></li>
+                <li><span className="footer-contact-icon" aria-hidden="true">〒</span> <span>{siteMeta.address}</span></li>
+                <li><span className="footer-contact-icon" aria-hidden="true">時</span> <span>{siteMeta.businessHours}</span></li>
+                <li><span className="footer-contact-icon" aria-hidden="true">@</span> <a href={`mailto:${siteMeta.email}`}>{siteMeta.email}</a></li>
               </ul>
             </div>
             

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { siteMeta } from '../config/siteMeta';
-import { ChevronDown } from 'lucide-react';
 import './SharkHero.css';
 
 const SharkHero: React.FC = () => {
@@ -19,6 +18,8 @@ const SharkHero: React.FC = () => {
 
     let isCancelled = false;
     let cleanupAnimation: (() => void) | undefined;
+    let scheduledHandle: number | undefined;
+    let scheduledWithIdleCallback = false;
 
     const loadAnimation = async () => {
       const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
@@ -74,10 +75,31 @@ const SharkHero: React.FC = () => {
       };
     };
 
-    void loadAnimation();
+    const scheduleAnimation = () => {
+      void loadAnimation();
+    };
+
+    const idleWindow = window as Window & {
+      requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
+      cancelIdleCallback?: (handle: number) => void;
+    };
+
+    if (idleWindow.requestIdleCallback) {
+      scheduledWithIdleCallback = true;
+      scheduledHandle = idleWindow.requestIdleCallback(scheduleAnimation, { timeout: 2500 });
+    } else {
+      scheduledHandle = window.setTimeout(scheduleAnimation, 1200);
+    }
 
     return () => {
       isCancelled = true;
+      if (scheduledHandle !== undefined) {
+        if (scheduledWithIdleCallback) {
+          idleWindow.cancelIdleCallback?.(scheduledHandle);
+        } else {
+          window.clearTimeout(scheduledHandle);
+        }
+      }
       cleanupAnimation?.();
     };
   }, []);
@@ -110,7 +132,7 @@ const SharkHero: React.FC = () => {
         <p className="hero-subtitle">{siteMeta.description}</p>
         <div className="scroll-indicator">
           <span>SCROLL</span>
-          <ChevronDown className="scroll-arrow" size={24} />
+          <span className="scroll-arrow" aria-hidden="true"></span>
         </div>
       </div>
     </div>

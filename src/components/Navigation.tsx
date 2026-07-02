@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { siteMeta } from '../config/siteMeta';
-import { Menu, X } from 'lucide-react';
 import './Navigation.css';
 
 const Navigation: React.FC = () => {
@@ -55,12 +54,17 @@ const Navigation: React.FC = () => {
         </nav>
 
         {/* Mobile Toggle */}
-        <button 
-          className="mobile-toggle" 
+        <button
+          className={`mobile-toggle ${isOpen ? 'is-open' : ''}`}
           onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle menu"
+          aria-label={isOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isOpen}
         >
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
+          <span className="mobile-toggle-bars" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
         </button>
       </div>
 

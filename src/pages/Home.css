@@ -68,6 +68,16 @@
   color: var(--color-cyan-highlight);
 }
 
+.inline-arrow {
+  display: inline-block;
+  margin-left: 0.45rem;
+  line-height: 1;
+}
+
+.inline-arrow::before {
+  content: "→";
+}
+
 @media (hover: none) {
   .highlight-card:hover {
     transform: none;

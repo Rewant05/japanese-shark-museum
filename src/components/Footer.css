@@ -85,10 +85,16 @@
   font-size: 0.95rem;
 }
 
-.footer-contact li svg {
+.footer-contact-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
   margin-top: 0.2rem;
   flex-shrink: 0;
   color: var(--color-muted-teal);
+  font-size: 0.85rem;
+  font-weight: 700;
 }
 
 .footer-social {
