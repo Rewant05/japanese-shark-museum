@@ -1,0 +1,38 @@
+.conservation-header {
+  background: radial-gradient(circle at center, #0a1128 0%, #050a17 100%);
+}
+
+.conservation-container {
+  max-width: 800px;
+}
+
+.conservation-block {
+  margin-bottom: 4rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  border-left: 4px solid var(--color-steel-gray);
+}
+
+.conservation-block.danger-block {
+  border-left-color: var(--color-danger-red);
+  background: rgba(255, 65, 54, 0.05);
+}
+
+.conservation-block.highlight-block {
+  border-left-color: var(--color-cyan-highlight);
+  background: rgba(0, 242, 254, 0.05);
+}
+
+.block-title {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-bone-white);
+}
+
+.conservation-block p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--color-bone-white);
+  opacity: 0.9;
+}

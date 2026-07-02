@@ -1,0 +1,142 @@
+.footer {
+  background-color: #050a17;
+  color: var(--color-bone-white);
+  padding: 6rem 0 2rem;
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4rem;
+  margin-bottom: 4rem;
+}
+
+.footer-brand {
+  flex: 1 1 300px;
+}
+
+.footer-logo {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  color: var(--color-cyan-highlight);
+  margin-bottom: 1rem;
+}
+
+.footer-tagline {
+  color: var(--color-steel-gray);
+  font-size: 1rem;
+}
+
+.footer-links-grid {
+  flex: 2 1 600px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+}
+
+.footer-col h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-bone-white);
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.footer-col h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background-color: var(--color-danger-red);
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.footer-col a {
+  color: var(--color-steel-gray);
+  font-size: 0.95rem;
+}
+
+.footer-col a:hover {
+  color: var(--color-cyan-highlight);
+}
+
+.footer-contact li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  color: var(--color-steel-gray);
+  font-size: 0.95rem;
+}
+
+.footer-contact li svg {
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+  color: var(--color-muted-teal);
+}
+
+.footer-social {
+  margin-top: 2rem;
+}
+
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--color-bone-white);
+  transition: all 0.3s ease;
+}
+
+.footer-social a:hover {
+  background-color: var(--color-cyan-highlight);
+  color: var(--color-black-blue);
+  transform: translateY(-3px);
+}
+
+.footer-bottom {
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.footer-disclaimer {
+  color: var(--color-muted-teal);
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.footer-copyright {
+  color: var(--color-steel-gray);
+  font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+  .footer-top {
+    flex-direction: column;
+    gap: 3rem;
+  }
+}

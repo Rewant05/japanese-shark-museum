@@ -1,0 +1,95 @@
+.contact-header {
+  background: radial-gradient(circle at center, #001f3f 0%, var(--color-black-blue) 100%);
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 4rem;
+}
+
+.contact-info h2 {
+  font-size: 2rem;
+  color: var(--color-cyan-highlight);
+  margin-bottom: 1.5rem;
+}
+
+.contact-intro {
+  color: var(--color-steel-gray);
+  line-height: 1.8;
+  margin-bottom: 3rem;
+}
+
+.info-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.info-list li {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.info-list svg {
+  color: var(--color-danger-red);
+  margin-top: 0.2rem;
+}
+
+.info-list strong {
+  display: block;
+  color: var(--color-bone-white);
+  margin-bottom: 0.5rem;
+}
+
+.info-list span,
+.info-list a {
+  color: var(--color-steel-gray);
+}
+
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.faq-item {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.faq-q {
+  font-size: 1.2rem;
+  color: var(--color-bone-white);
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.faq-q span {
+  color: var(--color-cyan-highlight);
+}
+
+.faq-a {
+  color: var(--color-steel-gray);
+  line-height: 1.6;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.faq-a span {
+  color: var(--color-danger-red);
+  font-weight: bold;
+}
+
+@media (max-width: 992px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+}
